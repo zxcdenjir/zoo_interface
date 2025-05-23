@@ -2,9 +2,9 @@
 {
     static void Main()
     {
-        Enclosure<Mammals> mammalEnclosure = new Enclosure<Mammals>("Вольер для млекопитающих");
-        Enclosure<Birds> birdEnclosure = new Enclosure<Birds>("Вольер для птиц");
-        Enclosure<Aquatic> aquaticEnclosure = new Enclosure<Aquatic>("Вольер для водных животных");
+        Enclosure<IAnimal> mammalEnclosure = new("Вольер для млекопитающих");
+        Enclosure<IAnimal> birdEnclosure = new("Вольер для птиц");
+        Enclosure<IAnimal> aquaticEnclosure = new("Вольер для водных животных");
 
 
         mammalEnclosure.AddAnimal(new Lion(mammalEnclosure.GetAnimals().Count, "Leo", "Лев", 5, false, true));
@@ -24,7 +24,6 @@
         Console.WriteLine();
         ZooManager.PrintPopulationStatistic();
 
-        Console.WriteLine();
         Console.WriteLine("\nСодержимое вольеров:");
         Console.WriteLine(mammalEnclosure.EnclosureType);
         mammalEnclosure.PrintEnclosure();
@@ -36,17 +35,39 @@
         aquaticEnclosure.PrintEnclosure();
 
         Console.WriteLine();
-        Console.WriteLine("\nПоиск животных по возрасту (0-5):");
-        List<Mammals> foundMammals = mammalEnclosure.FindAnimalsByAge(0, 5);
+        Console.WriteLine("\nПоиск животных по возрасту (1-3):");
+        List<IAnimal> foundMammals = mammalEnclosure.FindAnimalsByAge(1, 3);
         Console.WriteLine(mammalEnclosure.EnclosureType + ": найдено " + foundMammals.Count + " животных");
-        List<Birds> foundBirds = birdEnclosure.FindAnimalsByAge(0, 5);
+        foreach (Animal a in foundMammals)
+            Console.WriteLine(a);
+        Console.WriteLine();
+
+        List<IAnimal> foundBirds = birdEnclosure.FindAnimalsByAge(1, 3);
         Console.WriteLine(birdEnclosure.EnclosureType + ": найдено " + foundBirds.Count + " животных");
-        List<Aquatic> foundAquatics = aquaticEnclosure.FindAnimalsByAge(0, 5);
+        foreach (Animal a in foundBirds)
+            Console.WriteLine(a);
+        Console.WriteLine();
+
+        List<IAnimal> foundAquatics = aquaticEnclosure.FindAnimalsByAge(1, 3);
         Console.WriteLine(aquaticEnclosure.EnclosureType + ": найдено " + foundAquatics.Count + " животных");
+        foreach (Animal a in foundAquatics)
+            Console.WriteLine(a);
+        Console.WriteLine();
 
         Console.WriteLine("\nДемонстрация возможностей животных:");
-        mammalEnclosure.GetAnimals()[0].Move();
-        birdEnclosure.GetAnimals()[0].Fly();
-        aquaticEnclosure.GetAnimals()[0].Swim();
+        if (mammalEnclosure.GetAnimals()[0] is Lion lion)
+        {
+            lion.Move();
+            lion.Feed(FoodType.Мясо);
+            lion.Feed(FoodType.Рыба);
+        }
+        if (birdEnclosure.GetAnimals()[0] is Birds bird)
+        {
+            bird.Fly();
+        }
+        if (aquaticEnclosure.GetAnimals()[0] is Dolphin dolphin)
+        {
+            dolphin.Swim();
+        }
     }
-}
+}   

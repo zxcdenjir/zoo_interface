@@ -11,12 +11,12 @@
     public void AddAnimal(T animal)
     {
         Animals.Add(animal);
-        Console.WriteLine($"Добавлено новое животное в вольер {EnclosureType}");
+        Console.WriteLine($"Добавлено новое животное в {EnclosureType}");
     }
     public void RemoveAnimal(T animal)
     {
         Animals.Remove(animal);
-        Console.WriteLine($"Животное было убрано из вольера {EnclosureType}");
+        Console.WriteLine($"Животное было убрано из {EnclosureType}");
     }
     public List<T> GetAnimals()
     {
@@ -37,9 +37,9 @@
 
     public void PrintEnclosure()
     {
-        Console.WriteLine($"|----|-----------------|-----------------|---------|-----------|--------|---------|");
-        Console.WriteLine($"| ID | {"Имя",15} | {"Вид",15} | Возраст | Накормлен | Здоров | Тип еды |");
-        Console.WriteLine($"|----|-----------------|-----------------|---------|-----------|--------|---------|");
+        Console.WriteLine($"|----|-----------------|-------------------|---------|-----------|--------|---------|");
+        Console.WriteLine($"| ID | {"Имя",15} | {"Вид",17} | Возраст | Накормлен | Здоров | Тип еды |");
+        Console.WriteLine($"|----|-----------------|-------------------|---------|-----------|--------|---------|");
         foreach (T animal in Animals)
         {
             Console.Write($"| {animal.Id,2} ");
@@ -50,6 +50,6 @@
             Console.Write($"| {(animal.IsHealthy ? "Да" : "Нет"),6} ");
             Console.WriteLine($"| {animal.FoodType,7} |");
         }
-        Console.WriteLine($"|----|-----------------|-----------------|---------|-----------|--------|---------|");
+        Console.WriteLine($"|----|-----------------|-------------------|---------|-----------|--------|---------|");
     }
 }

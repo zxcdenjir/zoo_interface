@@ -2,12 +2,12 @@
 {
     public static List<Enclosure<IAnimal>> enclosures = [];
 
-    public static void AddEnclosure<T>(Enclosure<T> enclosure) where T : IAnimal
+    public static void AddEnclosure(Enclosure<IAnimal> enclosure)
     {
         enclosures.Add(enclosure);
         Console.WriteLine("Вольер добавлен в список вольеров");
     }
-    public static void RemoveEnclosure<T>(Enclosure<T> enclosure) where T : IAnimal
+    public static void RemoveEnclosure<T>(Enclosure<IAnimal> enclosure)
     {
         enclosures.Remove(enclosure);
         Console.WriteLine("Вольер убран из списка вольеров");
